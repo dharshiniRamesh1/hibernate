@@ -1,5 +1,7 @@
 package com.projects12.pro;
 
+import java.util.Collection;
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -49,9 +51,28 @@ public class App
     	
     	
     	 Query query=session.createQuery("select emp from Employee emp");
-    	
-    	 
     	 List<Employee>list1=query.list();
+    	
+		list1.stream().forEach(e->{
+    		 System.out.println(e.getNAME()+", " +e.getEmpDetails().getAddress()+", "  +e.getEmpDetails().getGender()+", " +e.getEmpDetails().getBankaccount()+", " +e.getEmpDetails().getYearsofservice());
+		});
+		
+		
+		Query q3=session.createQuery("Select emp from Employee emp");
+		List<Employee> emplist=q3.list();
+		emplist.stream().forEach(e->{
+			System.out.println(e);
+			System.out.println(e.getEmpAssisgnmentList().size());
+			e.getEmpAssisgnmentList().stream().forEach(temp->System.out.println("Projects "+temp.getName()+", "+temp.getOwner()));
+		System.out.println("------------");
+		
+		
+		});
+		
+	
+		
+		
+  
     	 
     	/* list1.stream().forEach(temp ->
     	 {
@@ -61,7 +82,7 @@ public class App
     		 System.out.println();
     		 System.out.println("------------------------");
     	 });*/
-    	 
+    /*	 
     	list1.stream().forEach(e->{
     		 System.out.println(e.getNAME() +", "+e.getSALARY()+", " +e.getDEPARTMENT());
     	 
@@ -81,7 +102,7 @@ public class App
     	// System.out.println(list1);
     	// int i =query.execute();
     	 
-    	 tnx.commit();
+    	// tnx.commit();
     	 
     	 System.out.println("Demo");
     }
